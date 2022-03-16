@@ -16,7 +16,10 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('movie');
-            $table->integer('showing');
+            $table->integer('cinema');
+            $table->integer('theater');
+            $table->timestamp('show_time');
+            $table->integer('tickets');
             $table->integer('user');
             $table->timestamps();
         });

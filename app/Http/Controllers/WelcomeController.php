@@ -5,17 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movies;
 
-class HomeController extends Controller
+class WelcomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application booking system.
@@ -24,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //get all showings of films
+        //get all Movies
         $records = Movies::get();
         return view('home', compact('records'));
 

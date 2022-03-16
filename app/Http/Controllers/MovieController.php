@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movies;
 
 class MovieController extends Controller
 {
@@ -23,7 +24,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return view('movies');
     }
 
     /**
@@ -34,7 +35,7 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Movies::create($request->all());
     }
 
     /**

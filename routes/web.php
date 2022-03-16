@@ -1,31 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\TheaterController;
-use app\Http\Controllers\MovieController;
+use App\Http\Controllers\TheaterController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\showingController;
+use App\Http\Controllers\WelcomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('Theater', TheaterController::class);
-    Route::resource('Movie', MovieController::class);
-});
+Route::resource('movie', MovieController::class)->middleware('auth');
+Route::resource('booking', BookingController::class)->middleware('auth');
+Route::resource('showing', showingController::class)->middleware('auth');
