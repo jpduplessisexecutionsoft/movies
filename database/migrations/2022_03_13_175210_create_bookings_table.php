@@ -17,10 +17,10 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->string('movie');
             $table->integer('cinema');
-            $table->integer('theater');
             $table->timestamp('show_time');
             $table->integer('tickets');
             $table->integer('user');
+            $table->string('code');
             $table->timestamps();
         });
     }

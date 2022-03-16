@@ -10,6 +10,6 @@ class booking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'showing'
+        'movie', 'cinema', 'user','show_time','code','tickets'
     ];
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\booking;
+use Auth;
 
 class bookingController extends Controller
 {
@@ -26,7 +28,7 @@ class bookingController extends Controller
         //
     }
 
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -34,7 +36,24 @@ class bookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::id())
+        {
+
+            $book = new booking();
+            $book->show_time = $request->show_time;
+            $book->movie = $request->movie;
+            $book->cinema = $request->cinema;
+            $book->tickets = $request->tickets;
+            $book->user = Auth::id();
+            $book->code = md5(rand(1111111111,9999999999));
+            $book->save();
+
+        }
+        else
+        {
+            session(['id' => $request->id]);
+            return view('auth.login');
+        }
     }
 
     /**

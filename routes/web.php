@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TheaterController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\showingController;
+use App\Http\Controllers\bookingController;
 use App\Http\Controllers\WelcomeController;
 
 Route::get('/', [WelcomeController::class, 'index']);
