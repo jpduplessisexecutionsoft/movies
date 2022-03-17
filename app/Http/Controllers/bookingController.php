@@ -45,13 +45,31 @@ class bookingController extends Controller
             $book->cinema = $request->cinema;
             $book->tickets = $request->tickets;
             $book->user = Auth::id();
-            $book->code = md5(rand(1111111111,9999999999));
-            $book->save();
+            $result = md5(rand(1111111111,9999999999));
+            $book->code = $result;
+            $rows = booking::where('movie', '=', $request->movie)->where('cinema','=',$request->cinema)->get();
+            $tickets = 0;
+            foreach($rows as $row)
+            {
+                $tickets += $row['tickets'];
+            }
 
+            if (($tickets + $request->tickets) <= 30) {
+
+
+                $book->save();
+                return view('result', compact('result'));
+
+            } else
+            {
+                //display error of too many tickets
+                $result = 'Not enough tickets available';
+                return view('result', compact('result'));
+
+            }
         }
         else
         {
-            session(['id' => $request->id]);
             return view('auth.login');
         }
     }

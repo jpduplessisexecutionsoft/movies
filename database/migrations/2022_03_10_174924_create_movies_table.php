@@ -17,7 +17,6 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->integer('movie');
             $table->integer('cinema');
-            $table->integer('theater');
             $table->timestamp('show_time');
             $table->timestamps();
         });
