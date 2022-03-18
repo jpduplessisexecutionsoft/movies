@@ -14,4 +14,3 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
 Route::resource('movie', MovieController::class)->middleware('auth');
 Route::resource('booking', BookingController::class)->middleware('auth');
-Route::resource('showing', showingController::class)->middleware('auth');

@@ -27,14 +27,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="theater">Select a theater:</label>
-
-                    <select name="theater" id="theater">
-                        <option value="1">Theater 1</option>
-                        <option value="2">Theater 2</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <div class="col-md-2">
                         Showing Time
                     </div>

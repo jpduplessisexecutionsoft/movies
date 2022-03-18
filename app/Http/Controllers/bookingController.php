@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movies;
 use Illuminate\Http\Request;
 use App\Models\booking;
 use Auth;
+use View;
 
 class bookingController extends Controller
 {
@@ -53,17 +55,21 @@ class bookingController extends Controller
             {
                 $tickets += $row['tickets'];
             }
-
+            //check whether there are enough tickets available for the booking
             if (($tickets + $request->tickets) <= 30) {
 
 
                 $book->save();
-                return view('result', compact('result'));
+                //get redemption code(s)
+                $codes = booking::where('user','=',Auth::id())->get();
+                //get all showings of films
+                $records = Movies::get();
+                return view::Make('home')->with(compact('records'))->with(compact('codes'));
 
             } else
             {
                 //display error of too many tickets
-                $result = 'Not enough tickets available';
+                $result = 'Not enough tickets available. '.$tickets . ' are available.';
                 return view('result', compact('result'));
 
             }
@@ -116,6 +122,9 @@ class bookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $booking = booking::findOrFail($id);
+        $booking->delete();
+        $result = 'deleted.';
+        return view('result', compact('result'));
     }
 }

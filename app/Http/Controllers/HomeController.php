@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movies;
+use App\Models\booking;
+use Auth;
+use View;
 
 class HomeController extends Controller
 {
@@ -24,9 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //get all showings of films
+        //get redemption code(s)
+        $codes = booking::where('user','=',Auth::id())->get();
+         //get all showings of films
         $records = Movies::get();
-        return view('home', compact('records'));
+        return view::Make('home')->with(compact('records'))->with(compact('codes'));
 
     }
 }
